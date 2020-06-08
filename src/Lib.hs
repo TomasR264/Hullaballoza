@@ -152,22 +152,11 @@ popularidad banda (clasif:clasifs)
 
 
 esBuenFest :: Festival -> [Clasificacion] -> Bool
-esBuenFest festival clasifs =  sum  (map  ((flip popularidad) clasifs) (bandas festival)) > 1000 && estaOrdenadaDos (map ((flip popularidad) clasifs) (bandas festival)) 
-
-popularidadAnt :: Int
-popularidadAnt = 0
+esBuenFest festival clasifs =  sum  (map  ((flip popularidad) clasifs) (bandas festival)) > 1000 && estaOrdenada (map ((flip popularidad) clasifs) (bandas festival)) 
 
 
-estaOrdenadaDos :: [Int] -> Bool
-estaOrdenadaDos [valor] = True
-estaOrdenadaDos (valor1:valor2:valores) 
- | valor1 < valor2 = estaOrdenadaDos (valor2:valores) 
+estaOrdenada :: [Int] -> Bool
+estaOrdenada [valor] = True
+estaOrdenada (valor1:valor2:valores) 
+ | valor1 < valor2 = estaOrdenada (valor2:valores) 
  | otherwise = False 
-
-{--
-estaOrdenada :: Festival -> [Clasificacion] [Banda] -> Bool
-estaOrdenada _ _ [] = True
-estaOrdenada festival clasifs (banda1 : banda2 : bandas)
- | popularidad banda1 clasifs >= popularidadAnt  && estaOrdenado festival clasifs (banda2 : bandas) 
-   where popularidadAnt = popularidad banda1 clasifs
---}
